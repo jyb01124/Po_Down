@@ -3,8 +3,6 @@ import string, requests, sys, os, threading
 from bs4 import BeautifulSoup
 import asyncio
 
-def cls(): 
-
 def make_video_url(url):
     html = requests.get(url)
     html = html.content
