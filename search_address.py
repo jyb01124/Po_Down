@@ -11,9 +11,9 @@ class search_address:
     def set_viewkey(self, viewkey):
         self.viewkey = viewkey
         
-    def viewkey_download_address(self):
+    def viewkey_download_address(self, video_quality):
 
-        url = "https://www.pornhub.com/view_video.php?viewkey=" + self.viewkey
+        url = "https://www.pornhub.com" + self.viewkey
 
         html = requests.get(url)
         html = html.content
@@ -40,4 +40,6 @@ class search_address:
             except:
                 pass
         
-        return quality
+        addr = quality[str(video_quality)]
+        
+        return addr

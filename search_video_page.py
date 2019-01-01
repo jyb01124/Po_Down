@@ -1,11 +1,22 @@
-#https://www.pornhub.com/video/search?search=fuck2
-
 # -*- coding: utf8 -*-
-import requests
+
+import requests, os, re
 from bs4 import BeautifulSoup
-import re
+
+
 
 class search_video_page:
+    restrict = [
+        ["\\",""],
+        ["/",""],
+        [":",""],
+        ["?",""],
+        ['"',''],
+        ["<","["],
+        [">","]"],
+        ["|","&"]
+    ]
+
     def __init__(self):
         pass
     
@@ -22,25 +33,13 @@ class search_video_page:
 
         vkey = {}
 
-        for i in range(0,len(tmp_0)):
-            tmp_1 = str(tmp_0[i]).split('"')
+        for i in range(4,len(tmp_0)):
+            tmp = str(tmp_0[i])
+            tmp_1 = str(tmp).split('"')
+
+            for j in range(0,len(self.restrict)):
+                tmp_1[5]=str(tmp_1[5]).replace(self.restrict[j][0],self.restrict[j][1])
+            
             vkey[str(tmp_1[3])] = tmp_1[5]
 
-        print(vkey)
-        
-
-    def j(self):    
-        for i in range(0,len(b)-1):
-            for j in range(i+1,len(b)):
-                if b[i] == b[j]:
-                    print(i)
-                    print(j)
-                    print(b[i])
-
-
-        
-
-if __name__ == "__main__":
-    s = search_video_page()
-    s.search("fuck",1)
-    s.search("fuck",2)
+        return vkey
